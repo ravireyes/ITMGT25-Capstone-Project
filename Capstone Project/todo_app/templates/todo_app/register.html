@@ -1,0 +1,19 @@
+{% extends "base_template.html" %}
+{% block content %}
+
+<!-- 
+    Block content and endblock are used to integrate page into template.
+    This page is for registering users. The django-based RegisterView is used here.
+-->
+
+<h1>Register</h1>
+
+<form method = "POST"> 
+    {% csrf_token %}
+    {{form.as_p}}
+    <div style = 'padding:10px;'>
+        <input type = "submit", value = "Register", class = 'button'>
+    </div>
+</form>
+
+{% endblock %}

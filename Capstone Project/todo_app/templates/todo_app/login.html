@@ -1,0 +1,24 @@
+{% extends "base_template.html" %}
+{% block content %}
+
+<!-- 
+    Block content and endblock are used to integrate page into template.
+    This page is for logging in. Users are also led here if they are not logged in.
+-->
+
+<h1>Login</h1>
+
+<form method = "POST"> 
+    {% csrf_token %}
+    {{form.as_p}}
+
+    <div style = 'padding:10px;'>
+        <input type = "submit", value = "Login", class = 'button'>
+    </div>
+</form>
+
+<p style = 'font-size:13px;'>
+    Don't have an account yet?<a href = "{% url 'register' %}">Register here</a> 
+</p>
+
+{% endblock %}

@@ -1,0 +1,29 @@
+{% extends "base_template.html" %}
+
+{% block content %}
+<!-- 
+    Block content and endblock are used to integrate page into template.
+    This page is for adding lists.
+-->
+<h3>{{ title }}</h3>
+<div>
+    <div>
+        <form method="post" style = 'font-size:large;'>
+            {% csrf_token %}
+            {{ form.as_p }}
+            <div style = 'padding:10px;'>
+                <input
+                    class = 'button'
+                    value="Save"
+                    type="submit">
+                <input
+                    class = 'button'
+                    value="Cancel"
+                    type="button"
+                    onclick="location.href='{% url "index" %}';">
+            </div>
+        </form>
+    </div>
+</div>
+
+{% endblock %}

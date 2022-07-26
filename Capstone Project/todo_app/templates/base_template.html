@@ -1,0 +1,197 @@
+<html lang="en">
+<!-- 
+Base template is used as primary template that each page will use. Cuts off the need to repetitively code css and html structures.
+
+As seen in this template and in other pages, the format {% url 'example' %} is often used in order to call on the url dispatcher to run a specific view. Other use cases are for displaying per element or conditionals.
+-->
+
+<head>
+    <meta charset = "utf-8">
+    <meta name = 'viewport' content = 'width=device-width, initial-scale=1'>
+
+    <style>
+        
+        body{
+            background-image: url('https://digitalsynopsis.com/wp-content/uploads/2017/02/beautiful-color-gradients-backgrounds-091-eternal-constance.png');
+            
+            background-repeat:no-repeat; 
+            
+            background-size:cover;
+
+            font-family: Arial, Helvetica, sans-serif;
+
+            color: #1C3B5C; 
+
+            padding-top: 50px;
+
+            padding-left: 30px;
+
+        }
+
+        h1, h2, h3, h4, h5, h6{
+            font-family: 'Montserrat', sans-serif;
+            margin:0px;
+            margin-top: 5px;
+            padding-left: 10px;
+        }
+
+        a,p{
+            color:#1C3B5C;
+            margin: 0px;
+            padding: 0px;
+            margin-left: 10px;
+        }
+
+        .container{
+            max-width: 550px;
+            margin: auto;
+            -webkit-box-shadow: 2px 2px 13px -4px rgba(0,0,0,0.21);
+            box-shadow: 2px 2px 13px -4px rgba(0,0,0,0.21);
+            background-color:white;
+        }
+
+        .header-bar{
+            display: flex;
+            justify-content: space-between;
+            padding: 15px;
+            border-radius: 5px 5px 0 0;
+            background-color:#1C3B5C;
+        }
+
+        .header-bar a {
+            color:whitesmoke;
+            text-decoration: none;
+        }
+
+        .item-wrapper {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 20px;
+            border-top: 1px solid rgb(226,226,226);
+            border-bottom: 1px solid rgb(226,226,226);
+            margin-top: 5px;
+            margin-bottom: 5px;
+            background-color: #FBF5F3;
+        }
+
+        .list-title {
+            display: flex;
+            color: #24445C;
+        }
+
+        .list-title a{
+            text-decoration: none;
+            margin-left: 20px;
+            font-size: 20px;
+            color: #24445C;
+        }
+
+        .item-title {
+            display: flex;
+        }
+
+        .item-title a{
+            text-decoration: none;
+            margin-left: 20px;
+            color: #24445C;
+        }
+
+        .item-complete{
+            height: 20px;
+            width: 20px;
+            background-color: #028A0F;
+            border-radius: 50%;
+            margin-right: 20px;
+        }
+
+        .item-incomplete{
+            height: 20px;
+            width: 20px;
+            background-color: #f94449;
+            border-radius: 50%;
+            margin-right: 20px;
+        }
+
+        .delete-icon{
+            text-decoration: none;
+            font-weight: 750;
+            color: #d9d9d9;
+            font-size: 25;
+            line-height: 0;
+        }
+        #search-bar{
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 7px;
+            box-sizing: border-box;
+            margin-right: 5px;
+        }
+
+        input[type = text],
+        input[type = password],
+        textarea{
+            border: 1px solid #24445C;
+            border-radius: 5px;
+            padding: 10x;
+            width: 90%;
+        }
+
+        label{
+            padding-top: 10px !important;
+            display: block;
+        }
+
+        .button{
+            border: 1px solid #24445C;
+            color:;
+            padding: 10px;
+            font-size: 12px;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+            margin-bottom: 3px;
+        }
+
+        .button-small{
+            border: 1px solid #24445C;
+            background-color:;
+            color:;
+            padding: 10px;
+            font-size: 12px;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+            margin-top: 3px;
+        }
+
+        .form-body{
+            padding: 20px;
+            padding-bottom: 2px;
+        }
+    </style>
+
+</head>
+
+<body>
+    <div class = 'container'>
+        <div class = 'header-bar'>
+            <div>
+                <h3>Hello {{request.user}}</h3>
+            </div>
+        
+            {% if request.user.is_authenticated %}
+            <a href="{% url 'logout' %}">Logout</a>
+            {% else %}
+                <a href="{% url 'login' %}">Login</a>
+            {% endif %}
+        
+        </div>
+
+    {% block content %}
+    {% endblock %}
+    </div>
+</body>
+
+</html>

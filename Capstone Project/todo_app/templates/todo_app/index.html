@@ -1,0 +1,44 @@
+{% extends "base_template.html" %}
+{% block content %}
+
+<!-- 
+    Block content and endblock are used to integrate page into template.
+    This page is for viewing all to-do lists.
+-->
+
+<div id="search-bar">
+    <form method = "GET" style = 'margin-bottom: 0px; display: flex;'>
+        <input type = 'text' name = 'search-lists'/>
+        <input class = 'button' type = "submit" value = "Search"/>
+    </form>
+</div>
+
+<div>
+    <div style = 'justify-content:space-between;'>
+        {% if object_list %}
+            <h3> All to-do lists: </h3>
+        {% endif %}
+    </div>
+
+    <div>
+        {% for todolist in list %}
+            <div class = 'item-wrapper'>
+                <div class = 'list-title'>
+                    <a class = 'list-title' href = '{% url "list" todolist.id %}'> {{ todolist.title}} </a>
+                </div>
+            </div>
+        {% empty %}
+        <h4> There are no to-do lists! </h4>
+        {% endfor %}
+    </div>
+</div>
+
+<p>
+    <input
+        class = 'button'
+        value = "Add a new list"
+        type = "button"
+        onclick = "location.href='{% url "list-add" %}'">
+</p>
+
+{% endblock %}

@@ -1,0 +1,27 @@
+{% extends "base_template.html" %}
+<!-- 
+    Block content and endblock are used to integrate page into template.
+    This page is for deleting lists.
+-->
+{% block content %}
+
+<h3>Delete List</h3>
+
+<p>Are you sure you want to delete the list <i>{{ object.title }}</i>?</p>
+
+<form method="POST">
+    {% csrf_token %}
+    <div style = 'padding:5px;'>
+        <input
+            class = 'button'
+            value="Yes, delete."
+            type="submit">
+        <input
+            class = 'button'
+            value="Cancel"
+            type="button"
+            onclick="location.href='{% url "index" %}'">
+    </div>
+</form>
+
+{% endblock %}

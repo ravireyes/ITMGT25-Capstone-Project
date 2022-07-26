@@ -1,0 +1,30 @@
+{% extends "base_template.html" %}
+
+{% block content %}
+
+<!-- 
+    Block content and endblock are used to integrate page into template.
+    This page is for deleting items.
+-->
+
+<h3>Delete To-do Item</h3>
+
+<p style="padding:10px; color:red; font-size:15;">Are you sure you want to delete the item: <b>{{ object.title }}</b>
+   from the list <i>{{ todo_list.title }}</i>?</p>
+
+<form method="POST">
+    {% csrf_token %}
+    <p>
+        <input
+            class = 'button'
+            value="Yes, delete."
+            type="submit">
+        <input
+            class = 'button'
+            value="Cancel"
+            type="button"
+            onclick="location.href='{% url "list" todo_list.id %}'">
+    </p>
+</form>
+
+{% endblock %}

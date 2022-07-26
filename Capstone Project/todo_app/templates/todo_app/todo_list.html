@@ -1,0 +1,65 @@
+{% extends "base_template.html" %}
+
+{% block content %}
+
+<!-- 
+    Block content and endblock are used to integrate page into template.
+    This page is for displaying to-do list contents (items).
+-->
+
+<div id="search-bar">
+    <form method = "GET" style = 'margin-bottom: 0px; display: flex;'>
+        <input type = 'text' name = 'search-item'/>
+        <input class = 'button' type = "submit" value = "Search"/>
+    </form>
+</div>
+
+<div>
+    <div style = 'justify-content:space-between;'>
+        <h5> Viewing current list: </h5>
+    </div>
+    <h5 style = 'margin:4; float:right;'> You have <i>{{count}}</i> unfinished item{{ count|pluralize:'s' }}</h5>
+        
+    <h3> {{ todo_list.title | upper }} </h3>
+
+    <div>
+        {% for todo in items %}
+            <div class = 'item-wrapper'>
+                {% if todo.complete %}
+                    <div class = 'item-title'>
+                        <div class = 'item-complete'></div>
+                        <i><s><a href = '{% url "item-update" todo_list.id todo.id%}'> {{ todo.title }} | Due {{ todo.due_date | date:"l, F j" }}</a></s></i>
+                    </div>
+                {% else %}
+                    <div class = 'item-title'>
+                        <div class = 'item-incomplete'></div>
+                        <a href = '{% url "item-update" todo_list.id todo.id%}'> {{ todo.title }} | Due {{ todo.due_date | date:"l, F j" }}</a>
+                    </div>
+                {% endif %}
+                    <a class = 'delete-icon' href= '{% url "item-delete" todo_list.id todo.id%}'> &#215; </a>
+            </div>
+        {% empty %}
+        <p> There are no to-do items in this list. </p>
+        {% endfor %}
+    </div>
+    <p>
+        <input
+            class = 'button'
+            value="Add a new item"
+            type="button"
+            onclick="location.href= '{% url "item-add" todo_list.id %}'"/>
+        <input
+            class = 'button'
+            value="Delete this list"
+            type="button"
+            onclick="location.href= '{% url "list-delete" todo_list.id %}'"/>    
+        <input
+            style = 'float:right;'
+            class='button'
+            value="Go back to lists"
+            type="button"
+            onclick="location.href = '{% url "return" %}'"/>
+    </p>
+</div>
+
+{% endblock %}
